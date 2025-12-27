@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -467,8 +467,12 @@ Detalles: ${d}
       alert("✅ Mensaje copiado. En Discord crea el ticket y pega el mensaje (Ctrl+V).");
     });
 
-    // ====== CARGA DE IMÁGENES (local) + FALLBACK RAW (SIEMPRE FUNCIONA) ======
-    const RAW_FALLBACK = "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png";
+    // ====== CARGA DE IMÁGENES (local) + FALLBACK RAW POR CATEGORÍA ======
+    const RAW_FALLBACKS = {
+      camisas: "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png",
+      pantalones: "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png",
+      chalecos: "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/ChatGPT%20Image%2027%20dic%202025%2C%2002_22_55%20a.m..png"
+    };
 
     const SEARCH_DIRS = ["", "assets/", "images/", "img/"];
     const EXTENSIONS = ["png", "jpg", "jpeg", "webp"];
@@ -498,8 +502,9 @@ Detalles: ${d}
         }
       }
 
-      // 2) Si no hay local, usar RAW (para que SIEMPRE se vea algo)
-      imgEl.src = RAW_FALLBACK + `?v=${Date.now()}`;
+      // 2) Si no hay local, usar RAW específico
+      const raw = RAW_FALLBACKS[name] || RAW_FALLBACKS.camisas;
+      imgEl.src = raw + `?v=${Date.now()}`;
       imgEl.style.display = "block";
       if (fallback) fallback.hidden = true;
     }
