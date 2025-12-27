@@ -1,518 +1,186 @@
-<!doctype html> 
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XCUSTOM — Ropa personalizada FiveM</title>
-  <meta name="description" content="XCUSTOM: ropa personalizada para FiveM. Camisas, pantalones, chalecos y packs para tu servidor RP." />
 
   <style>
     :root{
       --bg:#060806;
-      --panel:#0b130f;
-      --card:#0f1812;
+      --green:#19ff6a;
       --text:#e9f5ee;
       --muted:#9bb1a2;
-      --green:#19ff6a;
-      --green2:#00c853;
-      --border:rgba(25,255,106,.22);
-      --shadow:0 14px 50px rgba(0,0,0,.45);
-      --radius:20px;
-      --max:1180px;
+      --radius:18px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family:system-ui, Arial;
+      background:#040604;
       color:var(--text);
-      background:
-        radial-gradient(900px 520px at 20% 0%, rgba(25,255,106,.12), transparent 60%),
-        radial-gradient(700px 420px at 85% 10%, rgba(0,200,83,.09), transparent 60%),
-        linear-gradient(180deg, #040604, var(--bg));
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .wrap{max-width:1180px;margin:auto;padding:20px}
 
     /* NAV */
     .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(4,6,4,.72);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      position:sticky;top:0;
+      background:#050805;
+      border-bottom:1px solid #1aff6a33;
     }
     .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
       gap:12px;
     }
-    .brand{display:flex; align-items:center; gap:12px}
     .logo{
-      width:40px; height:40px; border-radius:12px;
-      background: url("xcustom-logo.png") center/cover no-repeat;
-      border:1px solid var(--border);
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-      flex:0 0 auto;
-    }
-    .brand h1{margin:0; font-size:16px; letter-spacing:.4px}
-    .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
-    .menu{
-      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-      justify-content:center;
-    }
-    .menu a{
-      font-size:13px;
-      padding:10px 12px;
+      width:42px;height:42px;
+      background:url("xcustom-logo.png") center/cover no-repeat;
       border-radius:12px;
-      color:rgba(233,245,238,.88);
-      transition:.18s ease;
+      border:1px solid #1aff6a55;
     }
-    .menu a:hover{background: rgba(255,255,255,.05)}
-
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:12px 14px;
+      padding:10px 14px;
       border-radius:14px;
-      border:1px solid var(--border);
-      background: linear-gradient(135deg, rgba(25,255,106,.18), rgba(0,200,83,.10));
-      box-shadow: var(--shadow);
+      background:#0b1b12;
+      border:1px solid #1aff6a55;
       font-weight:800;
-      letter-spacing:.2px;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .15s ease, filter .15s ease, background .15s ease;
-    }
-    .btn:hover{transform: translateY(-1px); filter:brightness(1.05)}
-    .btn.secondary{
-      background: rgba(255,255,255,.03);
-      box-shadow:none;
-      border-color: rgba(255,255,255,.10);
-      font-weight:700;
     }
 
     /* HERO */
-    .hero{padding:64px 0 26px}
-    .hero-box{
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:28px;
-      position:relative;
-      overflow:hidden;
+    .hero{
+      padding:70px 0;
+      text-align:center;
     }
-    .hero-box:before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(780px 420px at 20% 10%, rgba(25,255,106,.14), transparent 60%);
-      pointer-events:none;
+    .hero h1{
+      font-size:42px;
     }
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(25,255,106,.10);
-      border:1px solid rgba(25,255,106,.22);
-      font-size:12px;
-      position:relative; z-index:1;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: var(--green);
-      box-shadow: 0 0 0 6px rgba(25,255,106,.12);
-    }
-    .hero h2{
-      margin:14px 0 10px;
-      font-size:44px;
-      line-height:1.06;
-      letter-spacing:-.8px;
-      position:relative; z-index:1;
-    }
-    .hero h2 span{color:var(--green); text-shadow:0 0 22px rgba(25,255,106,.22)}
-    .hero p{
-      margin:0 0 18px;
-      color: rgba(233,245,238,.78);
-      max-width: 70ch;
-      line-height:1.6;
-      position:relative; z-index:1;
-    }
-    .cta-row{display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1}
-    .stats{
-      margin-top:16px;
-      display:grid; grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      position:relative; z-index:1;
-    }
-    .stat{
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-    }
-    .stat b{display:block; font-size:14px}
-    .stat span{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
-
-    /* SECTION */
-    section{padding:34px 0}
-    .section-head{
-      display:flex; justify-content:space-between; gap:16px; align-items:flex-end;
-      margin-bottom:14px;
-    }
-    .section-head h3{margin:0; font-size:22px}
-    .section-head p{margin:0; color:var(--muted); font-size:13px; max-width:70ch}
+    .hero span{color:var(--green)}
 
     /* SHOWCASE */
-    .showcase{
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      box-shadow: var(--shadow);
-      padding:22px;
-      overflow:hidden;
-      position:relative;
-    }
-    .showcase:before{
-      content:"";
-      position:absolute; inset:-20%;
-      background:
-        radial-gradient(circle at 25% 20%, rgba(25,255,106,.12), transparent 60%),
-        radial-gradient(circle at 80% 70%, rgba(0,200,83,.08), transparent 60%);
-      transform: rotate(8deg);
-      pointer-events:none;
-    }
     .show-grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      position:relative; z-index:1;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
     }
     .tile{
-      border-radius: 18px;
-      background: rgba(6,8,6,.35);
-      border:1px solid rgba(25,255,106,.20);
+      background:#0b130f;
+      border:1px solid #1aff6a33;
+      border-radius:var(--radius);
       padding:14px;
       text-align:center;
-      overflow:hidden;
-      position:relative;
-      min-height: 340px;
     }
-    .tile h4{
+    .tile h3{
+      color:var(--green);
       margin:6px 0 10px;
-      color: var(--green);
-      letter-spacing:.2px;
     }
     .tile img{
       width:100%;
       height:260px;
       object-fit:contain;
-      display:block;
-      border-radius:14px;
-      user-select:none;
-      -webkit-user-drag:none;
+      background:#000;
+      border-radius:12px;
       pointer-events:none;
-      background: rgba(0,0,0,.20);
-      border:1px solid rgba(255,255,255,.06);
-    }
-    .img-fallback{
-      height:260px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:14px;
-      background: rgba(0,0,0,.18);
-      border:1px dashed rgba(255,255,255,.10);
-      color: rgba(233,245,238,.70);
-      font-size:13px;
-      padding:14px;
     }
 
     /* CONTACT */
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:12px;
-    }
-    .panel{
-      border-radius: var(--radius);
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .field{display:grid; gap:6px; margin-bottom:12px}
-    label{font-size:12px; color:rgba(233,245,238,.78)}
-    input, textarea{
+    input,textarea{
       width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      background: rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.10);
-      color: var(--text);
-      outline:none;
-      font-size:14px;
+      padding:12px;
+      background:#0b130f;
+      border:1px solid #1aff6a33;
+      border-radius:12px;
+      color:white;
+      margin-bottom:10px;
     }
-    input:focus, textarea:focus{border-color: rgba(25,255,106,.35)}
-    textarea{min-height:120px; resize:vertical}
-
-    pre{
-      white-space: pre-wrap;
-      margin:0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size:13px;
-      color: rgba(233,245,238,.92);
-    }
-    .note{margin:12px 0 0; color:var(--muted); font-size:12px}
+    textarea{min-height:120px}
 
     footer{
-      padding:26px 0 40px;
-      color: rgba(233,245,238,.60);
-      border-top:1px solid rgba(255,255,255,.06);
+      margin-top:40px;
+      padding:20px;
+      border-top:1px solid #1aff6a33;
+      text-align:center;
+      color:var(--muted);
     }
-    .foot{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
-    .pill{padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02)}
 
-    /* Floating Discord */
     .discord-float{
       position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:99;
-      border-radius:999px;
-      padding:12px 14px;
-      background: linear-gradient(135deg, rgba(25,255,106,.95), rgba(0,200,83,.85));
-      border: none;
+      bottom:20px;
+      right:20px;
+      background:var(--green);
       color:#041007;
+      padding:14px 18px;
+      border-radius:999px;
       font-weight:900;
-      box-shadow: 0 18px 50px rgba(0,0,0,.55);
     }
 
-    @media (max-width: 980px){
-      .stats{grid-template-columns:1fr}
+    @media(max-width:900px){
       .show-grid{grid-template-columns:1fr}
-      .contact-grid{grid-template-columns:1fr}
-      .hero h2{font-size:36px}
-      .menu{display:none}
     }
   </style>
 </head>
 
 <body>
-  <div class="nav">
-    <div class="wrap nav-inner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>XCUSTOM</h1>
-          <small>Ropa personalizada para FiveM</small>
-        </div>
-      </div>
 
-      <nav class="menu" aria-label="menu">
-        <a href="#showcase">Showcase</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-
-      <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank" rel="noreferrer">🎮 Discord</a>
+<!-- NAV -->
+<div class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="logo"></div>
+      <strong>XCUSTOM</strong>
     </div>
+    <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank">🎮 Discord</a>
   </div>
+</div>
 
-  <header class="hero">
-    <div class="wrap">
-      <div class="hero-box">
-        <div class="kicker"><span class="dot"></span> Hecho para tu servidor RP</div>
-        <h2>Tu estilo en FiveM, <span>XCUSTOM</span></h2>
-        <p>
-          Camisas, pantalones y chalecos personalizados. Packs para crews/gangs, branding y showcase pro.
-        </p>
+<!-- HERO -->
+<div class="hero wrap">
+  <h1>Ropa personalizada para <span>FiveM</span></h1>
+  <p>Camisas · Pantalones · Chalecos</p>
+</div>
 
-        <div class="cta-row">
-          <a class="btn" href="#showcase">Ver showcase</a>
-          <a class="btn secondary" href="#contacto">Crear ticket</a>
-        </div>
+<!-- SHOWCASE -->
+<div class="wrap">
+  <div class="show-grid">
 
-        <div class="stats">
-          <div class="stat"><b>Showcase fijo</b><span>Nadie sube nada</span></div>
-          <div class="stat"><b>Discord</b><span>Tickets y soporte</span></div>
-          <div class="stat"><b>Negro + Verde</b><span>Estilo XCUSTOM</span></div>
-        </div>
-      </div>
+    <div class="tile">
+      <h3>Camisas</h3>
+      <img src="https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png">
     </div>
-  </header>
 
-  <main>
-    <!-- SHOWCASE -->
-    <section id="showcase">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h3>Showcase</h3>
-            <p>Diseños destacados de XCUSTOM — fijo (nadie puede subir ni cambiar fotos).</p>
-          </div>
-          <span class="pill">🟢 Negro + verde</span>
-        </div>
-
-        <div class="showcase">
-          <div class="show-grid">
-            <div class="tile">
-              <h4>Camisas</h4>
-              <img class="showimg" data-name="camisas" alt="Camisas XCUSTOM" />
-              <div class="img-fallback" hidden>No se encontró la imagen de Camisas.<br>Sube el archivo (camisas.png o camisas.jpg) al repo.</div>
-            </div>
-
-            <div class="tile">
-              <h4>Pantalones</h4>
-              <img class="showimg" data-name="pantalones" alt="Pantalones XCUSTOM" />
-              <div class="img-fallback" hidden>No se encontró la imagen de Pantalones.<br>Sube el archivo (pantalones.png o pantalones.jpg) al repo.</div>
-            </div>
-
-            <div class="tile">
-              <h4>Chalecos</h4>
-              <img class="showimg" data-name="chalecos" alt="Chalecos XCUSTOM" />
-              <div class="img-fallback" hidden>No se encontró la imagen de Chalecos.<br>Sube el archivo (chalecos.png o chalecos.jpg) al repo.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h3>Contacto</h3>
-            <p>Llena esto y toca “Crear ticket”: copia el mensaje y abre Discord para que crees el ticket y pegues (Ctrl+V).</p>
-          </div>
-        </div>
-
-        <div class="contact-grid">
-          <div class="panel">
-            <div class="field">
-              <label for="nombre">Tu nombre</label>
-              <input id="nombre" placeholder="Ej: Kamil" />
-            </div>
-            <div class="field">
-              <label for="pedido">¿Qué necesitas?</label>
-              <input id="pedido" placeholder="Ej: 2 camisas custom + logo, color verde/negro" />
-            </div>
-            <div class="field">
-              <label for="detalles">Detalles</label>
-              <textarea id="detalles" placeholder="Ej: estilo street, letras grandes, borde blanco, etc."></textarea>
-            </div>
-
-            <div class="cta-row">
-              <button class="btn" id="btnTicket">🎫 Crear ticket en Discord</button>
-              <a class="btn secondary" href="https://discord.gg/MA4TQEJ7" target="_blank" rel="noreferrer">🎮 Abrir Discord</a>
-            </div>
-
-            <p class="note">✅ Al tocar “Crear ticket” se copia el mensaje y se abre Discord. Luego creas el ticket y pegas (Ctrl+V).</p>
-          </div>
-
-          <div class="panel">
-            <h3 style="margin:0 0 8px">Mensaje generado</h3>
-            <p style="margin:0 0 12px; color:var(--muted); font-size:13px">Se actualiza solo.</p>
-            <div style="padding:14px; border-radius:16px; border:1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.18)">
-              <pre id="msg"></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap foot">
-      <div class="pill">© <span id="year"></span> XCUSTOM</div>
-      <div class="pill">FiveM RP • Discord Tickets</div>
+    <div class="tile">
+      <h3>Pantalones</h3>
+      <img src="https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png">
     </div>
-  </footer>
 
-  <a class="discord-float" href="https://discord.gg/MA4TQEJ7" target="_blank" rel="noreferrer">🎮 Discord</a>
+    <div class="tile">
+      <h3>Chalecos</h3>
+      <img src="https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/ChatGPT%20Image%2027%20dic%202025%2C%2002_22_55%20a.m..png">
+    </div>
 
-  <script>
-    // Año
-    document.getElementById("year").textContent = new Date().getFullYear();
+  </div>
+</div>
 
-    // Generar mensaje
-    const nombre = document.getElementById("nombre");
-    const pedido = document.getElementById("pedido");
-    const detalles = document.getElementById("detalles");
-    const msg = document.getElementById("msg");
+<!-- CONTACTO -->
+<div class="wrap">
+  <h2>Contacto</h2>
+  <input placeholder="Tu nombre">
+  <input placeholder="¿Qué necesitas?">
+  <textarea placeholder="Detalles"></textarea>
+  <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank">Crear ticket en Discord</a>
+</div>
 
-    function renderMsg(){
-      const n = (nombre.value || "—").trim();
-      const p = (pedido.value || "—").trim();
-      const d = (detalles.value || "—").trim();
+<footer>
+  © XCUSTOM — FiveM RP
+</footer>
 
-      msg.textContent =
-`Hola XCUSTOM 👋
-Soy: ${n}
-Quiero: ${p}
-Detalles: ${d}
+<a class="discord-float" href="https://discord.gg/MA4TQEJ7" target="_blank">🎮 Discord</a>
 
-¿Me puedes cotizar y decirme el tiempo de entrega? 💚`;
-    }
-    [nombre, pedido, detalles].forEach(el => el.addEventListener("input", renderMsg));
-    renderMsg();
-
-    // Botón: Crear ticket (copiar + abrir Discord)
-    document.getElementById("btnTicket").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(msg.textContent);
-      }catch(e){
-        alert("No pude copiar automático. Copia manual el mensaje del recuadro.");
-      }
-      window.open("https://discord.gg/MA4TQEJ7", "_blank");
-      alert("✅ Mensaje copiado. En Discord crea el ticket y pega el mensaje (Ctrl+V).");
-    });
-
-    // ====== CARGA DE IMÁGENES (local) + FALLBACK RAW POR CATEGORÍA ======
-    const RAW_FALLBACKS = {
-      camisas: "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png",
-      pantalones: "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png",
-      chalecos: "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/ChatGPT%20Image%2027%20dic%202025%2C%2002_22_55%20a.m..png"
-    };
-
-    const SEARCH_DIRS = ["", "assets/", "images/", "img/"];
-    const EXTENSIONS = ["png", "jpg", "jpeg", "webp"];
-
-    async function exists(url){
-      return await new Promise((resolve) => {
-        const test = new Image();
-        test.onload = () => resolve(true);
-        test.onerror = () => resolve(false);
-        test.src = url + `?v=${Date.now()}`;
-      });
-    }
-
-    async function tryLoad(imgEl, name){
-      const fallback = imgEl.parentElement.querySelector(".img-fallback");
-
-      // 1) Intentar local (camisas.png/jpg en raíz o carpetas)
-      for (const dir of SEARCH_DIRS){
-        for (const ext of EXTENSIONS){
-          const candidate = `${dir}${name}.${ext}`;
-          if (await exists(candidate)){
-            imgEl.src = candidate;
-            imgEl.style.display = "block";
-            if (fallback) fallback.hidden = true;
-            return;
-          }
-        }
-      }
-
-      // 2) Si no hay local, usar RAW específico
-      const raw = RAW_FALLBACKS[name] || RAW_FALLBACKS.camisas;
-      imgEl.src = raw + `?v=${Date.now()}`;
-      imgEl.style.display = "block";
-      if (fallback) fallback.hidden = true;
-    }
-
-    document.querySelectorAll(".showimg").forEach(img => {
-      const name = img.dataset.name;
-      tryLoad(img, name);
-    });
-  </script>
 </body>
 </html>
