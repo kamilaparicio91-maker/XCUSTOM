@@ -467,40 +467,41 @@ Detalles: ${d}
       alert("✅ Mensaje copiado. En Discord crea el ticket y pega el mensaje (Ctrl+V).");
     });
 
-    // ====== CARGA AUTOMÁTICA DE IMÁGENES (png/jpg + carpetas) ======
+    // ====== CARGA DE IMÁGENES (local) + FALLBACK RAW (SIEMPRE FUNCIONA) ======
+    const RAW_FALLBACK = "https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png";
+
     const SEARCH_DIRS = ["", "assets/", "images/", "img/"];
     const EXTENSIONS = ["png", "jpg", "jpeg", "webp"];
 
-    async function tryLoad(imgEl, name){
-      const candidates = [];
-      for (const dir of SEARCH_DIRS){
-        for (const ext of EXTENSIONS){
-          candidates.push(`${dir}${name}.${ext}`);
-        }
-      }
+    async function exists(url){
+      return await new Promise((resolve) => {
+        const test = new Image();
+        test.onload = () => resolve(true);
+        test.onerror = () => resolve(false);
+        test.src = url + `?v=${Date.now()}`;
+      });
+    }
 
+    async function tryLoad(imgEl, name){
       const fallback = imgEl.parentElement.querySelector(".img-fallback");
 
-      for (const src of candidates){
-        // Intento: asigna src y espera a ver si carga
-        const ok = await new Promise((resolve) => {
-          const test = new Image();
-          test.onload = () => resolve(true);
-          test.onerror = () => resolve(false);
-          test.src = src + `?v=${Date.now()}`; // evita cache
-        });
-
-        if (ok){
-          imgEl.src = src;
-          imgEl.style.display = "block";
-          if (fallback) fallback.hidden = true;
-          return;
+      // 1) Intentar local (camisas.png/jpg en raíz o carpetas)
+      for (const dir of SEARCH_DIRS){
+        for (const ext of EXTENSIONS){
+          const candidate = `${dir}${name}.${ext}`;
+          if (await exists(candidate)){
+            imgEl.src = candidate;
+            imgEl.style.display = "block";
+            if (fallback) fallback.hidden = true;
+            return;
+          }
         }
       }
 
-      // Si no encontró nada
-      imgEl.style.display = "none";
-      if (fallback) fallback.hidden = false;
+      // 2) Si no hay local, usar RAW (para que SIEMPRE se vea algo)
+      imgEl.src = RAW_FALLBACK + `?v=${Date.now()}`;
+      imgEl.style.display = "block";
+      if (fallback) fallback.hidden = true;
     }
 
     document.querySelectorAll(".showimg").forEach(img => {
