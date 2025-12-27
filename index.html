@@ -3,184 +3,590 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>XCUSTOM — Ropa personalizada FiveM</title>
-
+  <title>XCUSTOM — Ropa personalizada para FiveM</title>
+  <meta name="description" content="XCUSTOM: ropa personalizada para FiveM. Camisas, hoodies, logos y packs para tu servidor RP." />
   <style>
     :root{
-      --bg:#060806;
-      --green:#19ff6a;
-      --text:#e9f5ee;
+      --bg:#0b0f0c;
+      --card:#0f1612;
       --muted:#9bb1a2;
+      --text:#e9f5ee;
+      --green:#19ff6a;
+      --green2:#00c853;
+      --border:rgba(25,255,106,.18);
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
       --radius:18px;
+      --max:1120px;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:system-ui, Arial;
-      background:#040604;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 5%, rgba(25,255,106,.10), transparent 60%),
+        radial-gradient(700px 400px at 85% 15%, rgba(0,200,83,.08), transparent 60%),
+        linear-gradient(180deg, #060806, var(--bg));
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1180px;margin:auto;padding:20px}
-
-    /* NAV */
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
     .nav{
-      position:sticky;top:0;
-      background:#050805;
-      border-bottom:1px solid #1aff6a33;
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: rgba(6,8,6,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
-    .nav-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; gap:10px; align-items:center}
     .logo{
-      width:42px;height:42px;
-      background:url("xcustom-logo.png") center/cover no-repeat;
-      border-radius:12px;
-      border:1px solid #1aff6a55;
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(25,255,106,.25), rgba(0,200,83,.10));
+      border:1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
     }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(25,255,106,.35), transparent 55%);
+      transform: rotate(25deg);
+    }
+    .brand h1{font-size:16px; margin:0; letter-spacing:.5px}
+    .brand small{display:block; color:var(--muted); margin-top:2px; font-size:12px}
+    .menu{display:flex; gap:18px; align-items:center}
+    .menu a{
+      color:rgba(233,245,238,.86);
+      font-size:13px;
+      padding:10px 10px;
+      border-radius:12px;
+      transition:.2s ease;
+    }
+    .menu a:hover{background: rgba(255,255,255,.05)}
     .btn{
-      padding:10px 14px;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
       border-radius:14px;
-      background:#0b1b12;
-      border:1px solid #1aff6a55;
-      font-weight:800;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(25,255,106,.16), rgba(0,200,83,.10));
+      box-shadow: var(--shadow);
+      font-weight:700;
+      letter-spacing:.3px;
+      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.05)}
+    .btn.secondary{
+      background: rgba(255,255,255,.03);
+      box-shadow:none;
     }
 
     /* HERO */
-    .hero{
-      padding:70px 0;
-      text-align:center;
-    }
-    .hero h1{
-      font-size:42px;
-    }
-    .hero span{color:var(--green)}
-
-    /* SHOWCASE */
-    .show-grid{
+    .hero{padding:58px 0 26px}
+    .hero-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
+      grid-template-columns: 1.1fr .9fr;
+      gap:24px;
+      align-items:stretch;
     }
-    .tile{
-      background:#0b130f;
-      border:1px solid #1aff6a33;
-      border-radius:var(--radius);
-      padding:14px;
-      text-align:center;
+    .headline{
+      padding:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
-    .tile h3{
-      color:var(--green);
-      margin:6px 0 10px;
-    }
-    .tile img{
-      width:100%;
-      height:260px;
-      object-fit:contain;
-      background:#000;
-      border-radius:12px;
+    .headline:before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: var(--radius);
+      background: radial-gradient(700px 400px at 20% 10%, rgba(25,255,106,.12), transparent 60%);
       pointer-events:none;
     }
-
-    /* CONTACT */
-    input,textarea{
-      width:100%;
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(25,255,106,.10);
+      border:1px solid rgba(25,255,106,.20);
+      color: rgba(233,245,238,.95);
+      font-size:12px;
+      position:relative;
+      z-index:1;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(25,255,106,.12);
+    }
+    .headline h2{
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.8px;
+      position:relative;
+      z-index:1;
+    }
+    .headline h2 span{
+      color: var(--green);
+      text-shadow: 0 0 22px rgba(25,255,106,.25);
+    }
+    .headline p{
+      margin:0 0 18px;
+      color: rgba(233,245,238,.78);
+      font-size:15px;
+      line-height:1.6;
+      position:relative;
+      z-index:1;
+    }
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; position:relative; z-index:1}
+    .stats{
+      margin-top:16px;
+      display:grid; grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      position:relative; z-index:1;
+    }
+    .stat{
       padding:12px;
-      background:#0b130f;
-      border:1px solid #1aff6a33;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+    }
+    .stat b{display:block; font-size:14px}
+    .stat span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+
+    /* Showcase */
+    .showcase{
+      padding:26px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .showcase:before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(25,255,106,.12), transparent 55%),
+        radial-gradient(circle at 10% 80%, rgba(0,200,83,.09), transparent 60%);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .card-title{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; position:relative; z-index:1}
+    .card-title h3{margin:0; font-size:16px}
+    .card-title small{color:var(--muted)}
+    .mock-grid{
+      margin-top:14px;
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:12px;
+      position:relative; z-index:1;
+    }
+    .mock{
+      min-height:220px;
+      border-radius:16px;
+      border:1px dashed rgba(25,255,106,.28);
+      background: rgba(6,8,6,.38);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      text-align:center;
+      color: rgba(233,245,238,.75);
+    }
+    .mock strong{display:block; color:rgba(233,245,238,.92); margin-bottom:6px}
+    .mock input{display:none}
+    .upload{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
       border-radius:12px;
-      color:white;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      cursor:pointer;
+      margin-top:10px;
+    }
+    .upload:hover{background: rgba(255,255,255,.06)}
+    .preview{
+      width:100%;
+      height:220px;
+      object-fit:contain;
+      display:none;
+    }
+
+    /* Sections */
+    section{padding:34px 0}
+    .section-head{display:flex; justify-content:space-between; gap:16px; align-items:flex-end; margin-bottom:14px}
+    .section-head h3{margin:0; font-size:22px}
+    .section-head p{margin:0; color:var(--muted); font-size:13px; max-width:64ch}
+
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px}
+    .tile{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+    }
+    .tile h4{margin:0 0 8px}
+    .tile p{margin:0; color:rgba(233,245,238,.78); line-height:1.55; font-size:14px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: rgba(233,245,238,.88);
       margin-bottom:10px;
     }
-    textarea{min-height:120px}
+    .badge i{
+      width:8px; height:8px; border-radius:99px; background: var(--green);
+      box-shadow: 0 0 0 6px rgba(25,255,106,.10);
+      display:inline-block;
+    }
+    .price{
+      margin-top:10px;
+      display:flex; justify-content:space-between; align-items:center;
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color: rgba(233,245,238,.88);
+      font-size:13px;
+    }
+
+    /* Contact */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+    }
+    .field{display:grid; gap:6px; margin-bottom:12px}
+    label{font-size:12px; color:rgba(233,245,238,.78)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    input:focus, textarea:focus{border-color: rgba(25,255,106,.35)}
+    textarea{min-height:120px; resize:vertical}
 
     footer{
-      margin-top:40px;
-      padding:20px;
-      border-top:1px solid #1aff6a33;
-      text-align:center;
-      color:var(--muted);
+      padding:26px 0 40px;
+      color: rgba(233,245,238,.62);
+      border-top:1px solid rgba(255,255,255,.06);
     }
-
-    .discord-float{
+    .foot{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .pill{padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02)}
+    .whatsapp{
       position:fixed;
-      bottom:20px;
-      right:20px;
-      background:var(--green);
-      color:#041007;
-      padding:14px 18px;
+      right:18px;
+      bottom:18px;
+      z-index:50;
       border-radius:999px;
-      font-weight:900;
+      padding:12px 14px;
     }
 
-    @media(max-width:900px){
-      .show-grid{grid-template-columns:1fr}
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .mock-grid{grid-template-columns:1fr}
+      .headline h2{font-size:36px}
+      .menu{display:none}
     }
   </style>
 </head>
 
 <body>
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>XCUSTOM</h1>
+          <small>Ropa personalizada para FiveM</small>
+        </div>
+      </div>
 
-<!-- NAV -->
-<div class="nav">
-  <div class="wrap nav-inner">
-    <div class="brand">
-      <div class="logo"></div>
-      <strong>XCUSTOM</strong>
+      <nav class="menu" aria-label="menu">
+        <a href="#showcase">Showcase</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como">Cómo comprar</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a class="btn" href="#contacto" title="Cotizar">
+        <span>💚</span> Cotizar
+      </a>
     </div>
-    <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank">🎮 Discord</a>
   </div>
-</div>
 
-<!-- HERO -->
-<div class="hero wrap">
-  <h1>Ropa personalizada para <span>FiveM</span></h1>
-  <p>Camisas · Pantalones · Chalecos</p>
-</div>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="headline">
+        <div class="kicker"><span class="dot"></span> Hecho para tu servidor RP</div>
+        <h2>Tu estilo en FiveM, <span>custom</span> y con flow.</h2>
+        <p>
+          Camisas, hoodies, logos y packs de ropa listos para tu servidor.
+          Entregas organizadas, buen detalle y diseño limpio con identidad <b>XCUSTOM</b>.
+        </p>
 
-<!-- SHOWCASE -->
-<div class="wrap">
-  <div class="show-grid">
+        <div class="cta-row">
+          <a class="btn" href="#showcase">Ver showcase</a>
+          <a class="btn secondary" href="#catalogo">Ver catálogo</a>
+        </div>
 
-    <div class="tile">
-      <h3>Camisas</h3>
-      <img src="https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png">
+        <div class="stats">
+          <div class="stat">
+            <b>Diseños a medida</b>
+            <span>tu idea → tu prenda</span>
+          </div>
+          <div class="stat">
+            <b>Estilo verde XCUSTOM</b>
+            <span>branding consistente</span>
+          </div>
+          <div class="stat">
+            <b>Para RP / gangs / crews</b>
+            <span>packs y colecciones</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase" id="showcase">
+        <div class="card-title">
+          <div>
+            <h3>Showcase</h3>
+            <small>Sube tus 2 imágenes de camisas para que se vean aquí</small>
+          </div>
+          <small style="color:var(--muted)">Fondo negro + verde</small>
+        </div>
+
+        <div class="mock-grid">
+          <div class="mock">
+            <div>
+              <strong>Camisa 1</strong>
+              <img class="preview" id="prev1" alt="Preview 1" />
+              <div id="ph1">Sube una imagen (PNG/JPG)</div>
+              <label class="upload" for="img1">📷 Subir</label>
+              <input id="img1" type="file" accept="image/*" />
+            </div>
+          </div>
+          <div class="mock">
+            <div>
+              <strong>Camisa 2</strong>
+              <img class="preview" id="prev2" alt="Preview 2" />
+              <div id="ph2">Sube una imagen (PNG/JPG)</div>
+              <label class="upload" for="img2">📷 Subir</label>
+              <input id="img2" type="file" accept="image/*" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="tile">
-      <h3>Pantalones</h3>
-      <img src="https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/XCUSTOM_showcase.png">
+  <main>
+    <section id="catalogo">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Catálogo</h3>
+            <p>Plantillas y servicios típicos. Puedes cambiar textos, precios y descripción cuando quieras.</p>
+          </div>
+          <span class="pill">⚡ Entrega: “depende del pedido”</span>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="badge"><i></i> Camisa Custom</div>
+            <h4>Diseño + mockup</h4>
+            <p>Nombre, logo, estilo gang/crew, colores y acabado limpio para showcase.</p>
+            <div class="price"><span>Desde</span><b>$—</b></div>
+          </div>
+
+          <div class="tile">
+            <div class="badge"><i></i> Pack RP</div>
+            <h4>3–6 piezas</h4>
+            <p>Colección para tu grupo (variantes de color, detalles y consistencia visual).</p>
+            <div class="price"><span>Desde</span><b>$—</b></div>
+          </div>
+
+          <div class="tile">
+            <div class="badge"><i></i> Branding</div>
+            <h4>Logo + identidad</h4>
+            <p>Tipografía, color (verde XCUSTOM), estilo y assets para tu tienda/Discord.</p>
+            <div class="price"><span>Desde</span><b>$—</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Cómo comprar</h3>
+            <p>Proceso simple para que quede perfecto a la primera.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="tile">
+            <h4>1) Me mandas tu idea</h4>
+            <p>Nombre, colores, referencia (imagen si tienes), y qué tipo de prenda necesitas.</p>
+          </div>
+          <div class="tile">
+            <h4>2) Te paso propuesta</h4>
+            <p>Te enseño el mockup/showcase y hacemos cambios rápidos hasta que te guste.</p>
+          </div>
+          <div class="tile">
+            <h4>3) Entrega</h4>
+            <p>Te entrego los archivos y previews listos para publicar en tu tienda/Discord.</p>
+          </div>
+          <div class="tile">
+            <h4>4) Soporte</h4>
+            <p>Si necesitas versiones extra (colores/tallas), lo ajustamos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Contacto</h3>
+            <p>Completa esto y te genera un mensaje listo para copiar y pegar.</p>
+          </div>
+        </div>
+
+        <div class="contact">
+          <div class="tile">
+            <div class="field">
+              <label for="nombre">Tu nombre</label>
+              <input id="nombre" placeholder="Ej: Kamil" />
+            </div>
+            <div class="field">
+              <label for="pedido">¿Qué necesitas?</label>
+              <input id="pedido" placeholder="Ej: 2 camisas custom + logo, color verde/negro" />
+            </div>
+            <div class="field">
+              <label for="detalles">Detalles</label>
+              <textarea id="detalles" placeholder="Ej: estilo street, letras grandes, borde blanco, etc."></textarea>
+            </div>
+
+            <div class="cta-row">
+              <button class="btn" id="btnCopy">📋 Copiar mensaje</button>
+              <button class="btn secondary" id="btnClear">🧹 Limpiar</button>
+            </div>
+
+            <p style="margin:12px 0 0; color:var(--muted); font-size:12px">
+              Tip: en el botón de WhatsApp puedes poner tu número abajo (en el código).
+            </p>
+          </div>
+
+          <div class="tile">
+            <h4>Mensaje generado</h4>
+            <p style="color:var(--muted); margin-top:0; font-size:13px">Se actualiza solo.</p>
+            <div style="margin-top:10px; padding:14px; border-radius:16px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02)">
+              <pre id="msg" style="white-space:pre-wrap; margin:0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; font-size:13px; color:rgba(233,245,238,.92)"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div class="pill">© <span id="year"></span> XCUSTOM</div>
+      <div class="pill">Diseño: negro + verde • FiveM RP</div>
     </div>
+  </footer>
 
-    <div class="tile">
-      <h3>Chalecos</h3>
-      <img src="https://raw.githubusercontent.com/kamilaparicio91-maker/XCUSTOM/refs/heads/main/ChatGPT%20Image%2027%20dic%202025%2C%2002_22_55%20a.m..png">
-    </div>
+  <!-- WhatsApp Floating Button (edita el número) -->
+  <a class="btn whatsapp" id="waBtn" href="#" target="_blank" rel="noreferrer">
+    💬 WhatsApp
+  </a>
 
-  </div>
-</div>
+  <script>
+    // Año
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-<!-- CONTACTO -->
-<div class="wrap">
-  <h2>Contacto</h2>
-  <input placeholder="Tu nombre">
-  <input placeholder="¿Qué necesitas?">
-  <textarea placeholder="Detalles"></textarea>
-  <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank">Crear ticket en Discord</a>
-</div>
+    // Preview de imágenes (showcase)
+    function bindPreview(fileInputId, imgId, placeholderId){
+      const input = document.getElementById(fileInputId);
+      const img = document.getElementById(imgId);
+      const ph  = document.getElementById(placeholderId);
 
-<footer>
-  © XCUSTOM — FiveM RP
-</footer>
+      input.addEventListener("change", () => {
+        const file = input.files && input.files[0];
+        if(!file) return;
+        const url = URL.createObjectURL(file);
+        img.src = url;
+        img.style.display = "block";
+        ph.style.display = "none";
+      });
+    }
+    bindPreview("img1", "prev1", "ph1");
+    bindPreview("img2", "prev2", "ph2");
 
-<a class="discord-float" href="https://discord.gg/MA4TQEJ7" target="_blank">🎮 Discord</a>
+    // Generar mensaje de contacto
+    const nombre = document.getElementById("nombre");
+    const pedido = document.getElementById("pedido");
+    const detalles = document.getElementById("detalles");
+    const msg = document.getElementById("msg");
 
+    function renderMsg(){
+      const n = (nombre.value || "—").trim();
+      const p = (pedido.value || "—").trim();
+      const d = (detalles.value || "—").trim();
+
+      msg.textContent =
+`Hola XCUSTOM 👋
+Soy: ${n}
+Quiero: ${p}
+Detalles: ${d}
+
+¿Me puedes cotizar y decirme el tiempo de entrega? 💚`;
+      // WhatsApp link (edita el número)
+      const phone = "1XXXXXXXXXX"; // Ej: 17865551234 (sin +)
+      const waText = encodeURIComponent(msg.textContent);
+      document.getElementById("waBtn").href = `https://wa.me/${phone}?text=${waText}`;
+    }
+    [nombre, pedido, detalles].forEach(el => el.addEventListener("input", renderMsg));
+    renderMsg();
+
+    // Copiar
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(msg.textContent);
+        alert("Mensaje copiado ✅");
+      }catch(e){
+        alert("No pude copiar. Copia manual desde el recuadro.");
+      }
+    });
+
+    // Limpiar
+    document.getElementById("btnClear").addEventListener("click", () => {
+      nombre.value = "";
+      pedido.value = "";
+      detalles.value = "";
+      renderMsg();
+    });
+  </script>
 </body>
 </html>
