@@ -1,185 +1,108 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>XCUSTOM — Ropa personalizada FiveM</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XCUSTOM — Ropa personalizada FiveM</title>
+  <meta name="description" content="XCUSTOM: ropa personalizada para FiveM. Camisas, pantalones, chalecos y packs para tu servidor RP." />
 
-<style>
-:root{
-  --bg:#070b08;
-  --card:#0e1611;
-  --green:#19ff6a;
-  --text:#e9f5ee;
-  --muted:#9bb1a2;
-  --border:rgba(25,255,106,.25);
-  --radius:18px;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:system-ui,Segoe UI,Arial;
-  background:radial-gradient(circle at top,#0f2d1c,#070b08 60%);
-  color:var(--text);
-}
-a{text-decoration:none;color:inherit}
-.wrap{max-width:1200px;margin:auto;padding:0 20px}
+  <style>
+    :root{
+      --bg:#060806;
+      --panel:#0b130f;
+      --card:#0f1812;
+      --text:#e9f5ee;
+      --muted:#9bb1a2;
+      --green:#19ff6a;
+      --green2:#00c853;
+      --border:rgba(25,255,106,.22);
+      --shadow:0 14px 50px rgba(0,0,0,.45);
+      --radius:20px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 20% 0%, rgba(25,255,106,.12), transparent 60%),
+        radial-gradient(700px 420px at 85% 10%, rgba(0,200,83,.09), transparent 60%),
+        linear-gradient(180deg, #040604, var(--bg));
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-/* NAV */
-.nav{
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-.nav-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 0;
-}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{
-  width:40px;height:40px;border-radius:10px;
-  background:url("xcustom-logo.png") center/cover no-repeat;
-  border:1px solid var(--border);
-}
-.brand h1{font-size:18px;margin:0}
-.brand small{font-size:12px;color:var(--muted)}
-.btn{
-  padding:10px 16px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#19ff6a55,#19ff6a22);
-  border:1px solid var(--border);
-  font-weight:700;
-}
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(4,6,4,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background: url("xcustom-logo.png") center/cover no-repeat;
+      border:1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      flex:0 0 auto;
+    }
+    .brand h1{margin:0; font-size:16px; letter-spacing:.4px}
+    .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
+    .menu{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+      justify-content:center;
+    }
+    .menu a{
+      font-size:13px;
+      padding:10px 12px;
+      border-radius:12px;
+      color:rgba(233,245,238,.88);
+      transition:.18s ease;
+    }
+    .menu a:hover{background: rgba(255,255,255,.05)}
 
-/* HERO */
-.hero{
-  padding:70px 0 40px;
-  text-align:center;
-}
-.hero h2{
-  font-size:44px;
-  margin:0 0 10px;
-}
-.hero span{color:var(--green)}
-.hero p{color:var(--muted);max-width:700px;margin:auto}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(25,255,106,.18), rgba(0,200,83,.10));
+      box-shadow: var(--shadow);
+      font-weight:800;
+      letter-spacing:.2px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .15s ease, filter .15s ease, background .15s ease;
+    }
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.05)}
+    .btn.secondary{
+      background: rgba(255,255,255,.03);
+      box-shadow:none;
+      border-color: rgba(255,255,255,.10);
+      font-weight:700;
+    }
 
-/* SHOWCASE */
-.showcase{
-  background:linear-gradient(180deg,#0e1611,#0a100c);
-  border-radius:24px;
-  padding:30px;
-  margin:40px auto;
-  border:1px solid rgba(255,255,255,.08);
-}
-.showcase h3{text-align:center;margin-bottom:6px}
-.showcase p{text-align:center;color:var(--muted);margin-bottom:30px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.card{
-  background:#0b130f;
-  border-radius:20px;
-  border:1px solid var(--border);
-  padding:20px;
-  text-align:center;
-}
-.card h4{
-  margin:10px 0;
-  color:var(--green);
-}
-.card img{
-  width:100%;
-  height:260px;
-  object-fit:contain;
-  user-select:none;
-  pointer-events:none;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  color:var(--muted);
-  padding:30px 0;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-
-/* DISCORD FLOAT */
-.discord{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:linear-gradient(135deg,#19ff6a,#00c853);
-  color:#000;
-  padding:14px 18px;
-  border-radius:999px;
-  font-weight:800;
-}
-
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
-  .hero h2{font-size:34px}
-}
-</style>
-</head>
-
-<body>
-
-<!-- NAV -->
-<div class="nav">
-  <div class="wrap nav-inner">
-    <div class="brand">
-      <div class="logo"></div>
-      <div>
-        <h1>XCUSTOM</h1>
-        <small>Ropa personalizada FiveM</small>
-      </div>
-    </div>
-    <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank">🎮 Discord</a>
-  </div>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <h2>Tu estilo en FiveM, <span>XCUSTOM</span></h2>
-    <p>Diseños exclusivos, packs personalizados y equipamiento RP con identidad propia.</p>
-  </div>
-</section>
-
-<!-- SHOWCASE -->
-<section class="showcase wrap">
-  <h3>Showcase</h3>
-  <p>Diseños destacados de XCUSTOM</p>
-
-  <div class="grid">
-    <div class="card">
-      <h4>Camisas</h4>
-      <img src="camisas.png" alt="Camisas XCUSTOM">
-    </div>
-
-    <div class="card">
-      <h4>Pantalones</h4>
-      <img src="pantalones.png" alt="Pantalones XCUSTOM">
-    </div>
-
-    <div class="card">
-      <h4>Chalecos</h4>
-      <img src="chalecos.png" alt="Chalecos XCUSTOM">
-    </div>
-  </div>
-</section>
-
-<footer>
-  © XCUSTOM — FiveM RP
-</footer>
-
-<a class="discord" href="https://discord.gg/MA4TQEJ7" target="_blank">🎮 Discord</a>
-
-</body>
-</html>
+    /* HERO */
+    .hero{padding:64px 0 26px}
+    .hero-box{
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-box:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(780px 420px at 20% 10%, rgb
