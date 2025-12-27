@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XCUSTOM — Ropa personalizada para FiveM</title>
   <meta name="description" content="XCUSTOM: ropa personalizada para FiveM. Camisas, hoodies, logos y packs para tu servidor RP." />
+
   <style>
     :root{
       --bg:#0b0f0c;
@@ -31,6 +32,8 @@
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* NAV */
     .nav{
       position:sticky; top:0; z-index:30;
       backdrop-filter: blur(10px);
@@ -41,17 +44,10 @@
     .brand{display:flex; gap:10px; align-items:center}
     .logo{
       width:38px; height:38px; border-radius:12px;
-      background: linear-gradient(135deg, rgba(25,255,106,.25), rgba(0,200,83,.10));
+      background: url("xcustom-logo.png") center/cover no-repeat;
       border:1px solid var(--border);
       box-shadow: 0 10px 25px rgba(0,0,0,.35);
-      position:relative;
       overflow:hidden;
-    }
-    .logo:after{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(25,255,106,.35), transparent 55%);
-      transform: rotate(25deg);
     }
     .brand h1{font-size:16px; margin:0; letter-spacing:.5px}
     .brand small{display:block; color:var(--muted); margin-top:2px; font-size:12px}
@@ -64,6 +60,7 @@
       transition:.2s ease;
     }
     .menu a:hover{background: rgba(255,255,255,.05)}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
@@ -74,15 +71,12 @@
       box-shadow: var(--shadow);
       font-weight:700;
       letter-spacing:.3px;
-      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      transition: transform .15s ease, filter .15s ease;
       cursor:pointer;
       user-select:none;
     }
     .btn:hover{transform: translateY(-1px); filter:brightness(1.05)}
-    .btn.secondary{
-      background: rgba(255,255,255,.03);
-      box-shadow:none;
-    }
+    .btn.secondary{background: rgba(255,255,255,.03); box-shadow:none}
 
     /* HERO */
     .hero{padding:58px 0 26px}
@@ -288,7 +282,9 @@
     }
     .foot{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
     .pill{padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.02)}
-    .whatsapp{
+
+    /* Floating Discord Button */
+    .discord-float{
       position:fixed;
       right:18px;
       bottom:18px;
@@ -297,7 +293,6 @@
       padding:12px 14px;
     }
 
-    /* Responsive */
     @media (max-width: 920px){
       .hero-grid{grid-template-columns:1fr}
       .contact{grid-template-columns:1fr}
@@ -328,8 +323,8 @@
         <a href="#contacto">Contacto</a>
       </nav>
 
-      <a class="btn" href="#contacto" title="Cotizar">
-        <span>💚</span> Cotizar
+      <a class="btn" href="https://discord.gg/MA4TQEJ7" target="_blank" rel="noreferrer" title="Entrar al Discord">
+        🎮 Discord
       </a>
     </div>
   </div>
@@ -355,8 +350,8 @@
             <span>tu idea → tu prenda</span>
           </div>
           <div class="stat">
-            <b>Estilo verde XCUSTOM</b>
-            <span>branding consistente</span>
+            <b>Estilo XCUSTOM</b>
+            <span>negro + verde</span>
           </div>
           <div class="stat">
             <b>Para RP / gangs / crews</b>
@@ -404,9 +399,9 @@
         <div class="section-head">
           <div>
             <h3>Catálogo</h3>
-            <p>Plantillas y servicios típicos. Puedes cambiar textos, precios y descripción cuando quieras.</p>
+            <p>Plantillas y servicios típicos. Cambia textos y precios cuando quieras.</p>
           </div>
-          <span class="pill">⚡ Entrega: “depende del pedido”</span>
+          <span class="pill">⚡ Entrega: depende del pedido</span>
         </div>
 
         <div class="grid3">
@@ -427,7 +422,7 @@
           <div class="tile">
             <div class="badge"><i></i> Branding</div>
             <h4>Logo + identidad</h4>
-            <p>Tipografía, color (verde XCUSTOM), estilo y assets para tu tienda/Discord.</p>
+            <p>Tipografía, color, estilo y assets para tu tienda/Discord.</p>
             <div class="price"><span>Desde</span><b>$—</b></div>
           </div>
         </div>
@@ -439,26 +434,26 @@
         <div class="section-head">
           <div>
             <h3>Cómo comprar</h3>
-            <p>Proceso simple para que quede perfecto a la primera.</p>
+            <p>Proceso simple para que quede perfecto.</p>
           </div>
         </div>
 
         <div class="grid2">
           <div class="tile">
             <h4>1) Me mandas tu idea</h4>
-            <p>Nombre, colores, referencia (imagen si tienes), y qué tipo de prenda necesitas.</p>
+            <p>Nombre, colores, referencia (imagen si tienes) y qué prenda necesitas.</p>
           </div>
           <div class="tile">
             <h4>2) Te paso propuesta</h4>
-            <p>Te enseño el mockup/showcase y hacemos cambios rápidos hasta que te guste.</p>
+            <p>Te enseño el mockup/showcase y hacemos cambios rápidos.</p>
           </div>
           <div class="tile">
             <h4>3) Entrega</h4>
-            <p>Te entrego los archivos y previews listos para publicar en tu tienda/Discord.</p>
+            <p>Archivos y previews listos para publicar.</p>
           </div>
           <div class="tile">
             <h4>4) Soporte</h4>
-            <p>Si necesitas versiones extra (colores/tallas), lo ajustamos.</p>
+            <p>Si necesitas versiones extra (colores/variantes), lo ajustamos.</p>
           </div>
         </div>
       </div>
@@ -469,7 +464,7 @@
         <div class="section-head">
           <div>
             <h3>Contacto</h3>
-            <p>Completa esto y te genera un mensaje listo para copiar y pegar.</p>
+            <p>Completa esto y genera un mensaje listo para copiar y pegar en Discord.</p>
           </div>
         </div>
 
@@ -490,11 +485,11 @@
 
             <div class="cta-row">
               <button class="btn" id="btnCopy">📋 Copiar mensaje</button>
-              <button class="btn secondary" id="btnClear">🧹 Limpiar</button>
+              <a class="btn secondary" href="https://discord.gg/MA4TQEJ7" target="_blank" rel="noreferrer">🎮 Abrir Discord</a>
             </div>
 
             <p style="margin:12px 0 0; color:var(--muted); font-size:12px">
-              Tip: en el botón de WhatsApp puedes poner tu número abajo (en el código).
+              Copia el mensaje y pégalo en tu Discord de XCUSTOM 💚
             </p>
           </div>
 
@@ -513,17 +508,16 @@
   <footer>
     <div class="wrap foot">
       <div class="pill">© <span id="year"></span> XCUSTOM</div>
-      <div class="pill">Diseño: negro + verde • FiveM RP</div>
+      <div class="pill">Negro + verde • FiveM RP</div>
     </div>
   </footer>
 
-  <!-- WhatsApp Floating Button (edita el número) -->
-  <a class="btn whatsapp" id="waBtn" href="#" target="_blank" rel="noreferrer">
-    💬 WhatsApp
+  <!-- Botón flotante Discord -->
+  <a class="btn discord-float" href="https://discord.gg/MA4TQEJ7" target="_blank" rel="noreferrer">
+    🎮 Discord
   </a>
 
   <script>
-    // Año
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Preview de imágenes (showcase)
@@ -544,7 +538,7 @@
     bindPreview("img1", "prev1", "ph1");
     bindPreview("img2", "prev2", "ph2");
 
-    // Generar mensaje de contacto
+    // Mensaje para copiar y pegar en Discord
     const nombre = document.getElementById("nombre");
     const pedido = document.getElementById("pedido");
     const detalles = document.getElementById("detalles");
@@ -562,10 +556,6 @@ Quiero: ${p}
 Detalles: ${d}
 
 ¿Me puedes cotizar y decirme el tiempo de entrega? 💚`;
-      // WhatsApp link (edita el número)
-      const phone = "1XXXXXXXXXX"; // Ej: 17865551234 (sin +)
-      const waText = encodeURIComponent(msg.textContent);
-      document.getElementById("waBtn").href = `https://wa.me/${phone}?text=${waText}`;
     }
     [nombre, pedido, detalles].forEach(el => el.addEventListener("input", renderMsg));
     renderMsg();
@@ -574,18 +564,10 @@ Detalles: ${d}
     document.getElementById("btnCopy").addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(msg.textContent);
-        alert("Mensaje copiado ✅");
+        alert("Mensaje copiado ✅ Pégalo en Discord.");
       }catch(e){
         alert("No pude copiar. Copia manual desde el recuadro.");
       }
-    });
-
-    // Limpiar
-    document.getElementById("btnClear").addEventListener("click", () => {
-      nombre.value = "";
-      pedido.value = "";
-      detalles.value = "";
-      renderMsg();
     });
   </script>
 </body>
