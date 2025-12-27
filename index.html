@@ -194,6 +194,8 @@
       padding:14px;
       text-align:center;
       overflow:hidden;
+      position:relative;
+      min-height: 340px;
     }
     .tile h4{
       margin:6px 0 10px;
@@ -211,6 +213,18 @@
       pointer-events:none;
       background: rgba(0,0,0,.20);
       border:1px solid rgba(255,255,255,.06);
+    }
+    .img-fallback{
+      height:260px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      background: rgba(0,0,0,.18);
+      border:1px dashed rgba(255,255,255,.10);
+      color: rgba(233,245,238,.70);
+      font-size:13px;
+      padding:14px;
     }
 
     /* CONTACT */
@@ -342,15 +356,20 @@
           <div class="show-grid">
             <div class="tile">
               <h4>Camisas</h4>
-              <img src="camisas.png" alt="Camisas XCUSTOM" />
+              <img class="showimg" data-name="camisas" alt="Camisas XCUSTOM" />
+              <div class="img-fallback" hidden>No se encontró la imagen de Camisas.<br>Sube el archivo (camisas.png o camisas.jpg) al repo.</div>
             </div>
+
             <div class="tile">
               <h4>Pantalones</h4>
-              <img src="pantalones.png" alt="Pantalones XCUSTOM" />
+              <img class="showimg" data-name="pantalones" alt="Pantalones XCUSTOM" />
+              <div class="img-fallback" hidden>No se encontró la imagen de Pantalones.<br>Sube el archivo (pantalones.png o pantalones.jpg) al repo.</div>
             </div>
+
             <div class="tile">
               <h4>Chalecos</h4>
-             <img src="chalecos.png" alt="Chalecos XCUSTOM" />
+              <img class="showimg" data-name="chalecos" alt="Chalecos XCUSTOM" />
+              <div class="img-fallback" hidden>No se encontró la imagen de Chalecos.<br>Sube el archivo (chalecos.png o chalecos.jpg) al repo.</div>
             </div>
           </div>
         </div>
@@ -434,7 +453,6 @@ Detalles: ${d}
 
 ¿Me puedes cotizar y decirme el tiempo de entrega? 💚`;
     }
-    [nombre, pedido, detalles].forEach(el => el.addEventListener("Attach".toLowerCase(), renderMsg)); // avoid typo? (kept safe)
     [nombre, pedido, detalles].forEach(el => el.addEventListener("input", renderMsg));
     renderMsg();
 
@@ -447,6 +465,47 @@ Detalles: ${d}
       }
       window.open("https://discord.gg/MA4TQEJ7", "_blank");
       alert("✅ Mensaje copiado. En Discord crea el ticket y pega el mensaje (Ctrl+V).");
+    });
+
+    // ====== CARGA AUTOMÁTICA DE IMÁGENES (png/jpg + carpetas) ======
+    const SEARCH_DIRS = ["", "assets/", "images/", "img/"];
+    const EXTENSIONS = ["png", "jpg", "jpeg", "webp"];
+
+    async function tryLoad(imgEl, name){
+      const candidates = [];
+      for (const dir of SEARCH_DIRS){
+        for (const ext of EXTENSIONS){
+          candidates.push(`${dir}${name}.${ext}`);
+        }
+      }
+
+      const fallback = imgEl.parentElement.querySelector(".img-fallback");
+
+      for (const src of candidates){
+        // Intento: asigna src y espera a ver si carga
+        const ok = await new Promise((resolve) => {
+          const test = new Image();
+          test.onload = () => resolve(true);
+          test.onerror = () => resolve(false);
+          test.src = src + `?v=${Date.now()}`; // evita cache
+        });
+
+        if (ok){
+          imgEl.src = src;
+          imgEl.style.display = "block";
+          if (fallback) fallback.hidden = true;
+          return;
+        }
+      }
+
+      // Si no encontró nada
+      imgEl.style.display = "none";
+      if (fallback) fallback.hidden = false;
+    }
+
+    document.querySelectorAll(".showimg").forEach(img => {
+      const name = img.dataset.name;
+      tryLoad(img, name);
     });
   </script>
 </body>
